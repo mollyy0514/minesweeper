@@ -76,6 +76,15 @@ function checkGameEnd() {
                 }
             })
         })
+        board.forEach(row => {
+            row.forEach(tile => {
+                if (tile.mine) {
+                    tile.element.addEventListener('dblclick', () => {
+                        window.location.reload();
+                    })
+                }
+            })
+        })
     }
 }
 
