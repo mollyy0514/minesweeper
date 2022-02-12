@@ -157,8 +157,7 @@ export function checkWin(board) {
     return board.every(row => {
         return row.every(tile => {
             return tile.status === TILE_STATUSES.NUMBER ||
-            (tile.mine && (tile.status === TILE_STATUSES.HIDDEN || 
-                                tile.status === TILE_STATUSES.MARKED))
+            (tile.mine && (tile.status === TILE_STATUSES.HIDDEN || tile.status === TILE_STATUSES.MARKED))
         })
     })
 }

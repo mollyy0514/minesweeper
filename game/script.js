@@ -8,7 +8,18 @@ var NUMBER_OF_MINES = sessionStorage.getItem("NUMBER_OF_MINES");
 const board = createBoard(BOARD_SIZE, NUMBER_OF_MINES);
 const boardElement = document.querySelector('.board');
 const minesLeftText = document.querySelector('[data-mine-count]');
-const messageText = document.querySelector('.subtext');
+const messageText = document.getElementById('sub');
+const restart = document.getElementById('restart');
+
+var time = timer();
+var hours = 0;
+var mins = 0;
+var seconds = 0;
+
+// 重新整理
+restart.addEventListener('click', () => {
+    window.location.reload();
+})
 
 board.forEach(row => {
     row.forEach(tile => {
@@ -45,10 +56,16 @@ function checkGameEnd() {
     }
 
     if (win) {
+        clearTimeout(time);
         messageText.textContent = "You Win!";
+        messageText.style.color = "#f09ca3";
+        messageText.style.fontWeight = "bold";
     }
     if (lose) {
+        clearTimeout(time);
         messageText.textContent = "You Lose.";
+        messageText.style.color = "#64b9f5";
+        messageText.style.fontWeight = "bold";
         board.forEach(row => {
             row.forEach(tile => {
                 if (tile.status === TILE_STATUSES.MARKED) {
@@ -66,35 +83,71 @@ function stopProp(e) {
     e.stopImmediatePropagation();
 }
 
+function timer() {
+    time = setTimeout(() => {
+        seconds++;
+
+        if (seconds > 59){
+            seconds = 0;
+            mins++;
+
+            if (mins > 59) {
+                mins = 0;
+                hours++;
+                if (hours < 10) {
+                    $("#hours").text('0' + hours + ':');
+                } 
+                else {
+                    $("#hours").text(hours + ':');
+                }
+            }
+                         
+            if (mins < 10) {                     
+                $("#mins").text('0' + mins + ':');
+            }       
+            else {
+                $("#mins").text(mins + ':');
+            }
+        }
+
+        if (seconds < 10) {
+            $("#seconds").text('0' + seconds);
+        } 
+        else {
+            $("#seconds").text(seconds);
+        }
+    
+        timer();
+    }, 1000);
+}
+
 export function mineCntColor(tile) {
     if (tile.exceedMineCap == true) {
         tile.element.style.backgroundColor = 'Orange';
     }
-    if (tile.status == TILE_STATUSES.NUMBER) {
-        if (tile.element.textContent == 1) {
-            tile.element.style.color = 'blue';
-        }
-        else if (tile.element.textContent == 2) {
-            tile.element.style.color = 'green';
-        }
-        else if (tile.element.textContent == 3) {
-            tile.element.style.color = 'red';
-        }
-        else if (tile.element.textContent == 4) {
-            tile.element.style.color = '#00008b';   // darkblue
-        }
-        else if (tile.element.textContent == 5) {
-            tile.element.style.color = 'purple';
-        }
-        else if (tile.element.textContent == 6) {
-            tile.element.style.color = 'yellow';
-        }
-        else if (tile.element.textContent == 7) {
-            tile.element.style.color = '#000';
-        }
-        else {
-            tile.element.style.color = '#b8860b';   // darkgoldenrod
-        }
+    if (tile.element.textContent == 1) {
+        tile.element.style.color = 'blue';
+    }
+    else if (tile.element.textContent == 2) {
+        tile.element.style.color = 'green';
+    }
+    else if (tile.element.textContent == 3) {
+        tile.element.style.color = 'red';
+    }
+    else if (tile.element.textContent == 4) {
+        tile.element.style.color = '#00008b';   // darkblue
+    }
+    else if (tile.element.textContent == 5) {
+        tile.element.style.color = 'purple';
+    }
+    else if (tile.element.textContent == 6) {
+        tile.element.style.color = 'yellow';
+    }
+    else if (tile.element.textContent == 7) {
+        tile.element.style.color = '#000';
+    }
+    else {
+        tile.element.style.color = '#b8860b';   // darkgoldenrod
     }
     
 }

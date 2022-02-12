@@ -21,6 +21,21 @@ body {
     font-size: 1.5rem;
     margin-bottom: 10px;
 }
+
+#restart {
+    font-size: 1.5rem;
+    font-family: "Lucida Console", "Courier New", monospace;
+    /* width: 120px;
+    height: 40px; */
+    margin-top: 7px;
+    margin-bottom: 20px;
+    padding: 3px 20px;
+}
+
+#timer {
+    color: beige;
+    margin-left: 20px;
+}
   
 .board {
     display: inline-grid;
@@ -29,6 +44,24 @@ body {
     grid-template-rows: repeat(var(--size), 40px);
     gap: 4px;
     background-color: #919191;
+}
+
+.back {
+    font-size: 1.5rem;
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-decoration: none;
+    margin: 3px;
+    border: 3px;
+    padding: 3px 20px;
+    width: 400px;
+    height: 60px;
+    color: #000;
+    background-color: #fff;
+    border-color: #591200;
+}
+
+.backDiv {
+    margin-top: 25px;
 }
   
 .board > * {
