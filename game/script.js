@@ -19,7 +19,7 @@ board.forEach(row => {
         })
         tile.element.addEventListener('contextmenu', e => {
             e.preventDefault(); // 按下右鍵不會有選單跑出來
-            markTile(tile);
+            markTile(board, tile);
             listMinesLeft();
         })
     })
@@ -52,7 +52,7 @@ function checkGameEnd() {
         board.forEach(row => {
             row.forEach(tile => {
                 if (tile.status === TILE_STATUSES.MARKED) {
-                    markTile(tile);
+                    markTile(board, tile);
                 }
                 if (tile.mine) {
                     revealTile(board, tile);
@@ -67,30 +67,36 @@ function stopProp(e) {
 }
 
 export function mineCntColor(tile) {
-    if (tile.element.textContent == 1) {
-        tile.element.style.color = 'blue';
+    if (tile.exceedMineCap == true) {
+        tile.element.style.backgroundColor = 'Orange';
     }
-    else if (tile.element.textContent == 2) {
-        tile.element.style.color = 'green';
+    if (tile.status == TILE_STATUSES.NUMBER) {
+        if (tile.element.textContent == 1) {
+            tile.element.style.color = 'blue';
+        }
+        else if (tile.element.textContent == 2) {
+            tile.element.style.color = 'green';
+        }
+        else if (tile.element.textContent == 3) {
+            tile.element.style.color = 'red';
+        }
+        else if (tile.element.textContent == 4) {
+            tile.element.style.color = '#00008b';   // darkblue
+        }
+        else if (tile.element.textContent == 5) {
+            tile.element.style.color = 'purple';
+        }
+        else if (tile.element.textContent == 6) {
+            tile.element.style.color = 'yellow';
+        }
+        else if (tile.element.textContent == 7) {
+            tile.element.style.color = '#000';
+        }
+        else {
+            tile.element.style.color = '#b8860b';   // darkgoldenrod
+        }
     }
-    else if (tile.element.textContent == 3) {
-        tile.element.style.color = 'red';
-    }
-    else if (tile.element.textContent == 4) {
-        tile.element.style.color = '#00008b';   // darkblue
-    }
-    else if (tile.element.textContent == 5) {
-        tile.element.style.color = 'purple';
-    }
-    else if (tile.element.textContent == 6) {
-        tile.element.style.color = 'yellow';
-    }
-    else if (tile.element.textContent == 7) {
-        tile.element.style.color = '#000';
-    }
-    else {
-        tile.element.style.color = '#b8860b';   // darkgoldenrod
-    }
+    
 }
 
 // 1. Populate a board with tiles/mines

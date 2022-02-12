@@ -18,11 +18,17 @@ export function createBoard(boardSize, numberOfMines) {
         for (let y = 0; y < boardSize; y++) {
             const element = document.createElement('div');
             element.dataset.status = TILE_STATUSES.HIDDEN;
+            var surroundingMines = 0;
+            var exceedMineCap = false;
+            var surroundingMark = 0;
 
             const tile = {
                 element,
                 x,
                 y,
+                surroundingMines,   // 周遭有幾個地雷
+                exceedMineCap,  // 超過周圍地雷數
+                surroundingMark,
                 // 如果 mine 設在那個位置，則那一格會被記為 true，其他的則是 false
                 mine: minePositions.some(positionMatch.bind(null, { x, y })),
                 get status() {
@@ -37,24 +43,53 @@ export function createBoard(boardSize, numberOfMines) {
         board.push(row);
     }
 
-    
-    
+    for (var i = 0; i < boardSize; i++) {
+        for (var j = 0; j < boardSize; j++) {
+            if (!board[i][j].mine) {
+                countSurroundingMines(board, board[i][j]);
+            }
+        }
+    }
+
     return board;
 }
 
-export function markTile(tile) {
+export function markTile(board, tile) {
     if (tile.status !== TILE_STATUSES.HIDDEN && tile.status !== TILE_STATUSES.MARKED) {
         return;
     }
 
     if (tile.status === TILE_STATUSES.MARKED) {
         tile.status = TILE_STATUSES.HIDDEN;
+        for (var i = -1; i <= 1; i++) {
+            for (var j = -1; j <= 1; j++) {
+                var checkTile = board[tile.x + i]?.[tile.y + j];
+                if (checkTile) {
+                    if (checkTile.mine == false) {
+                        checkTile.surroundingMark--;
+                        console.log(checkTile);
+                    }
+                }
+            }
+        }
+        
     }
     else {
         tile.status = TILE_STATUSES.MARKED;
+        for (var i = -1; i <= 1; i++) {
+            for (var j = -1; j <= 1; j++) {
+                var checkTile = board[tile.x + i]?.[tile.y + j];
+                if (checkTile) {
+                    if (checkTile.mine == false) {
+                        checkTile.surroundingMark++;
+                        console.log(checkTile);
+                    }
+                }
+            }
+        }
     }
 
-
+    checkExceed(board, tile);
 }
 
 export function revealTile(board, tile) {
@@ -68,7 +103,7 @@ export function revealTile(board, tile) {
         // 計算這個 tile 周圍已經佈了多少 flag
         for (var i = -1; i <= 1; i++) {
             for (var j = -1; j <= 1; j++) {
-                const checkTile = board[tile.x + i]?.[tile.y + j];
+                var checkTile = board[tile.x + i]?.[tile.y + j];
                 console.log(checkTile);
                 if (checkTile) {
                     // 如果周圍的這個 tile 有被 mark 過 cnt 就加 1
@@ -85,7 +120,7 @@ export function revealTile(board, tile) {
         if (cnt == mines.length) {
             for (var i = -1; i <= 1; i++) {
                 for (var j = -1; j <= 1; j++) {
-                    const checkTile = board[tile.x + i]?.[tile.y + j];
+                    var checkTile = board[tile.x + i]?.[tile.y + j];
                     if (checkTile) {
                         if (checkTile.status == TILE_STATUSES.HIDDEN) {
                             if (checkTile.mine) {
@@ -182,6 +217,12 @@ function nearbyTiles(board, { x, y }) {
     return tiles;
 }
 
+function countSurroundingMines(board, t) {
+    const checkAdjacentTiles = nearbyTiles(board, t);
+    const checkMines = checkAdjacentTiles.filter(tt => tt.mine);    // 只留下 true 的格子
+    t.surroundingMines = checkMines.length;
+}
+
 // 顯示這個 tile 周圍有多少 mine
 function revealMinesCnt(board, t) {
     const checkAdjacentTiles = nearbyTiles(board, t);
@@ -196,4 +237,31 @@ function revealMinesCnt(board, t) {
     }
 }
 
-
+function checkExceed(board, t) {
+    for (var i = -1; i <= 1; i++) {
+        for (var j = -1; j <= 1; j++) {
+            var checkTile = board[t.x + i]?.[t.y + j];
+            if (checkTile) {
+                if (checkTile.surroundingMark > checkTile.surroundingMines) {
+                    checkTile.exceedMineCap = true;
+                    if (checkTile.x == t.x && checkTile.y == t.y) {
+                        
+                    }
+                    else if (checkTile.status == TILE_STATUSES.NUMBER) {
+                        checkTile.element.style.backgroundColor = 'Orange';
+                        console.log(checkTile.x, checkTile.y, 'meow!')
+                    }
+                }
+                else {
+                    checkTile.exceedMineCap = false;
+                    if (checkTile.x == t.x && checkTile.y == t.y) {
+                        
+                    }
+                    else if (checkTile.status == TILE_STATUSES.NUMBER) {
+                        checkTile.element.style.backgroundColor = '#919191';
+                    }
+                }
+            }
+        }
+    }
+}
