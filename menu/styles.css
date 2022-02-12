@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    background-color: #333;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: "Lucida Console", "Courier New", monospace;
+    flex-direction: column;
+    color: white;
+}
+
+.title {
+    margin: 20px;
+}
+
+.levels {
+    font-family: "Courier New";
+    margin-left: 15rem;
+    margin-right: 15rem;
+    background-color: #591200;
+}
+
+#level1, #level2, #level3, #level4, #level5 {
+    font-size: 25px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    margin: 3px;
+    border: 3px;
+    padding: 3px 10px;
+    width: 400px;
+    height: 60px;
+    margin-bottom: 15px;
+    color: #fff;
+    background-color: #555;
+    border-color: #591200;
+    border-style: solid;
+    cursor: pointer;
+}
+
+#enter {
+    font-size: 25px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 3px;
+    border: 3px;
+    padding: 3px 20px;
+    width: 400px;
+    height: 60px;
+    margin-bottom: 15px;
+    color: #591200;
+    background-color: #777;
+    border-color: #591200;
+    border-style: solid;
+    cursor: pointer;
+}
+
+#enterDiv {
+    margin-top: 30px;
+}
