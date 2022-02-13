@@ -88,7 +88,7 @@ export function markTile(board, tile) {
             }
         }
     }
-
+    // 每按一次右鍵就重新判斷周圍的 tile 有沒有超過其可容納之地雷數
     checkExceed(board, tile);
 }
 
