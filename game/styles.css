@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+  }
+  
+body {
+    margin: 0;
+    background-color: #333;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: "Lucida Console", "Courier New", monospace;
+    flex-direction: column;
+    color: white;
+}
+  
+.title {
+    margin: 20px;
+}
+  
+.subtext {
+    color: #CCC;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+#restart {
+    font-size: 1.5rem;
+    font-family: "Lucida Console", "Courier New", monospace;
+    margin-top: 7px;
+    margin-bottom: 20px;
+    padding: 3px 20px;
+}
+
+#timer {
+    color: beige;
+    margin-left: 20px;
+}
+  
+.board {
+    display: inline-grid;
+    padding: 10px;
+    grid-template-columns: repeat(var(--size), 40px);
+    grid-template-rows: repeat(var(--size), 40px);
+    gap: 4px;
+    background-color: #919191;
+}
+
+.back {
+    font-size: 1.5rem;
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-decoration: none;
+    margin: 3px;
+    border: 3px;
+    padding: 3px 20px;
+    width: 400px;
+    height: 60px;
+    color: #000;
+    background-color: #fff;
+    border-color: #591200;
+}
+
+.backDiv {
+    margin-top: 25px;
+}
+  
+.board > * {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: 2px solid #BBB;
+    user-select: none;
+}
+  
+.board > [data-status="hidden"] {
+    background-color: #BBB;
+    cursor: pointer;
+}
+  
+.board > [data-status="mine"] {
+    background-color: red;
+}
+  
+.board > [data-status="number"] {
+    background-color: none;
+}
+  
+.board > [data-status="marked"] {
+    background-color: yellow;
+}
