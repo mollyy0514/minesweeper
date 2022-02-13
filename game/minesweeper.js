@@ -180,7 +180,7 @@ function getMinePositions(boardSize, numberOfMines) {
             x: randomNumber(boardSize),
             y: randomNumber(boardSize)
         }
-
+        // 確認沒有重複
         if (!positions.some(p => positionMatch(p, position))) {
             positions.push(position);
         }
