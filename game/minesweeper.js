@@ -67,7 +67,7 @@ export function markTile(board, tile) {
                 if (checkTile) {
                     if (checkTile.mine == false) {
                         checkTile.surroundingMark--;
-                        console.log(checkTile);
+                        // console.log(checkTile);
                     }
                 }
             }
@@ -82,7 +82,7 @@ export function markTile(board, tile) {
                 if (checkTile) {
                     if (checkTile.mine == false) {
                         checkTile.surroundingMark++;
-                        console.log(checkTile);
+                        // console.log(checkTile);
                     }
                 }
             }
@@ -104,18 +104,18 @@ export function revealTile(board, tile) {
         for (var i = -1; i <= 1; i++) {
             for (var j = -1; j <= 1; j++) {
                 var checkTile = board[tile.x + i]?.[tile.y + j];
-                console.log(checkTile);
+                // console.log(checkTile);
                 if (checkTile) {
                     // 如果周圍的這個 tile 有被 mark 過 cnt 就加 1
                     if (checkTile.status == TILE_STATUSES.MARKED) {
                         cnt++;
-                        console.log(cnt);
+                        // console.log(cnt);
                     }
                 }
             }
         }
-        console.log(cnt);
-        console.log(mines.length);
+        // console.log(cnt);
+        // console.log(mines.length);
         // 只要周圍佈的 mark 已經等於他周圍該有的地雷數
         if (cnt == mines.length) {
             for (var i = -1; i <= 1; i++) {
@@ -248,7 +248,7 @@ function checkExceed(board, t) {
                     }
                     else if (checkTile.status == TILE_STATUSES.NUMBER) {
                         checkTile.element.style.backgroundColor = 'Orange';
-                        console.log(checkTile.x, checkTile.y, 'meow!')
+                        // console.log(checkTile.x, checkTile.y, 'meow!')
                     }
                 }
                 else {

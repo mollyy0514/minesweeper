@@ -1,6 +1,5 @@
 // Display / UI
 import { TILE_STATUSES, createBoard, markTile, revealTile, checkWin, checklose } from "./minesweeper.js";
-// import { boardInfo, BOARD_SIZE, NUMBER_OF_MINES } from "../menu/input.js";
 
 var BOARD_SIZE = sessionStorage.getItem("BOARD_SIZE");
 var NUMBER_OF_MINES = sessionStorage.getItem("NUMBER_OF_MINES");
