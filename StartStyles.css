@@ -1,15 +1,28 @@
 body {
-    margin: 0;
     background-color: #333;
-    text-align: center;
     font-size: 1.5rem;
     font-family: "Lucida Console", "Courier New", monospace;
-    flex-direction: column;
     color: white;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
 }
 
 .title {
     margin: 20px;
+    
+    /* animation 參數設定 */
+    position: relative;
+    animation-name: MoveToRight;    /*動畫名稱，需與 keyframe 名稱對應*/
+    animation-duration: 2s;    /*動畫持續時間，單位為秒*/
+    animation-delay: 0.1s;    /*動畫延遲開始時間 */
 }
 
 #start {
@@ -25,4 +38,20 @@ body {
     border-color: #591200;
     border-style: solid;
     cursor: pointer;
+
+    /* animation 參數設定 */
+    position: relative;
+    animation-name: MoveToLeft;    /*動畫名稱，需與 keyframe 名稱對應*/
+    animation-duration: 2s;    /*動畫持續時間，單位為秒*/
+    animation-delay: 0.1s;    /*動畫延遲開始時間 */
+}
+
+@keyframes MoveToRight {
+    from { left: -100%; top: -50%; }
+    to { left: 0%; top: 0; }
+}
+
+@keyframes MoveToLeft {
+    from { right: -100%; bottom: -50%; }
+    to { right: 0%; bottom: 0; }
 }
