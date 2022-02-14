@@ -1,6 +1,8 @@
 // Logic
 import { mineCntColor } from "./script.js";
 
+var regretFlag = 3;
+
 export const TILE_STATUSES = {
     HIDDEN: 'hidden',
     MINE: 'mine',
@@ -145,7 +147,21 @@ export function revealTile(board, tile) {
 
     if (tile.mine) {
         tile.status = TILE_STATUSES.MINE;
-        return;
+        // ----------- 要加入jQuery ----------
+        if (regretFlag > 0) {
+            if (confirm('You have ' + regretFlag + ' chances left')) {
+                regretFlag--;
+                tile.status = TILE_STATUSES.HIDDEN;
+                return;
+            }
+            else {
+                regretFlag = -1;
+                return;
+            }
+        }
+        else {
+            return;
+        }
     }
 
     tile.status = TILE_STATUSES.NUMBER;

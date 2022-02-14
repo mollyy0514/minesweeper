@@ -28,6 +28,10 @@ body {
     margin-top: 7px;
     margin-bottom: 20px;
     padding: 3px 20px;
+    color: #000;
+    background-color: #fff;
+    border-color: #591200;
+    cursor: pointer;
 }
 
 #timer {
