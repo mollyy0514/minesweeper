@@ -100,7 +100,6 @@ export function revealTile(board, tile) {
 
     // 如果這個 tile 已經被開過
     if (tile.status === TILE_STATUSES.NUMBER) {
-        // console.log('yeah!');
         var cnt = 0;
         // 計算這個 tile 周圍已經佈了多少 flag
         for (var i = -1; i <= 1; i++) {
@@ -147,7 +146,6 @@ export function revealTile(board, tile) {
 
     if (tile.mine) {
         tile.status = TILE_STATUSES.MINE;
-        // ----------- 要加入jQuery ----------
         if (regretFlag > 0) {
             if (confirm('You have ' + regretFlag + ' chances left')) {
                 regretFlag--;

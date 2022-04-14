@@ -68,8 +68,10 @@ function checkGameEnd() {
         board.forEach(row => {
             row.forEach(tile => {
                 if (tile.status === TILE_STATUSES.MARKED) {
+                    // 如果有被 mark，就要取消 mark (之後才能顯示地雷)
                     markTile(board, tile);
                 }
+                // 如果是地雷（不管有沒有 mark 或有沒有被按到打開）
                 if (tile.mine) {
                     revealTile(board, tile);
                 }
@@ -162,12 +164,12 @@ export function mineCntColor(tile) {
 
 // 1. Populate a board with tiles/mines
 // 2. Left click on tiles
-    // a. Reaveal tiles
-    // b. Change color of mine count for every tile
-        // Blue, Green, Red, DarkBlue, Purple, Yellow, Black, DarkGoldenRod
-    // c. Reveal surrounding tiles
+//     a. Reaveal tiles
+//     b. Change color of mine count for every tile
+//         Blue, Green, Red, DarkBlue, Purple, Yellow, Black, DarkGoldenRod
+//     c. Reveal surrounding tiles
 // 3. Right click on tiles
-    // a. Mark tiles
-    // b. Check if the mark count exceeds the real mine count
-        // when marking a tile, we nedd to check whether the surrounding tiles have exceed their mine capacity.
+//     a. Mark tiles
+//     b. Check if the mark count exceeds the real mine count
+//         when marking a tile, we nedd to check whether the surrounding tiles have exceed their mine capacity.
 // 4. Check for win/lose
